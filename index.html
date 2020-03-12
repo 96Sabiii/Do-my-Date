@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Do my date</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:200">
+	<link type="text/css" rel="stylesheet" href="res/css/fullcalendar/fullcalendar.min.css" />
+	<link type="text/css" rel="stylesheet" href="res/css/fullcalendar/fullcalendar.print.min.css" media="print" />
+	<link type="text/css" rel="stylesheet" href="res/css/fabric/googlefonts.css">
+	<link type="text/css" rel="stylesheet" href="res/css/materialize/css/materialize.css" />
+	<link type="text/css" rel="stylesheet" href="res/css/font-awesome/css/font-awesome.min.css">
+	<link type="text/css" rel="stylesheet" href="res/css/app.css">
+</head>
+
+<body>
+	<section class="hero">
+		<h1>Welcome to Do my Date <i class="fa fa-calendar"></i></h1>
+		<h3>Your free and fun to use calendar application.</h3>
+		<a class="btn welcome">Start here!</a>
+	</section>
+	<div id="wrap" style="display: none">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo right">Do my Date</a>
+				<ul id="nav-mobile" class="left hide-on-med-and-down">
+					<li><a title="Change to calender view" id="calendar-view">Calendar</a></li>
+					<li><a title="Change to to-do view" id="todo-view">To-Do</a></li>
+					<li><a title="Click to display about view" id="about">Help</a></li>
+					<li><a title="Clear all entries" class="btn-floating btn-medium waves-effect waves-light orange" id="clear"><i class="material-icons">delete_forever</i></a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="fixed-action-btn">
+			<a id="createButton" title="Create new entry" class="btn-floating btn-large"><i class="large material-icons">mode_edit</i></a>
+		</div>
+		<div class="infoTab">
+			<div class="inner" style="display: none">
+				<h4>Help</h4>
+				<p>This calender helps you to memorize all your relevant tasks and stories.</p>
+				<p>Just click on a date to create an entry. If you want to view your entries in a list click on To-Do.</p>
+				<p>To clear all your entries from the storage click the trash can button in the navigation bar.</p>
+				<p>Your possibilities to create an entry are:</p>
+				<ul>
+					<li>- Give your entry a headline</li>
+					<li>- Choose a color for the headline</li>
+					<li>- Add text to your canvas</li>
+					<li>- Edit the text with different fonts and colors</li>
+					<li>- Add picture links</li>
+					<li>- Duplicate the selected element</li>
+					<li>- Delete the selected element</li>
+					<li>- Save or cancel your entry</li>
+				</ul>
+			</div>
+		</div>
+		<div class="calendar-wrapper">
+			<div class="header"></div>
+			<div id="calendar" style="display: block"></div>
+			<div style="clear:both"></div>
+			<div class="canvas-wrapper" style="display: none">
+				<div id="controls" class="controls">
+					<div class="event-color">Entry color: <input id="eventColorPicker" type="color" value="#26a69a" /></div>
+					<p>
+						<input id="input-header" class="header-input" type="text" placeholder="Give your entry a headline" onfocus="this.value=''" maxlength="25" />
+					</p>
+					<div id="idOfEvent" hidden>0</div>
+					<div id="dateOfEvent" hidden>0</div>
+				</div>
+				<div class="row">
+					<div class="column">
+						<div id="external-events">
+							<h4>Choose your element:</h4>
+							<div id="textboxButton" title="Choose your text input" class="fc-event"><i class="fa fa-font"></i>&nbsp; Text</div>
+							<div id="textbox-options" style="display: none">
+								<select id="font-family" class="fc-event inner">
+									<option value="Times New Roman">Times New Roman</option>
+									<option value="Pacifico">Pacifico</option>
+									<option value="VT323">VT323</option>
+									<option value="Quicksand">Quicksand</option>
+									<option value="Inconsolata">Inconsolata</option>
+								</select>
+								<div class="fc-event inner text-color">
+									Text color <input id="textColorPicker" type="color" />
+								</div>
+							</div>
+							<div id="pictureButton" title="Add a picture link" class="fc-event"><i class="fa fa-file-image-o"></i>&nbsp; Picture</div>
+							<div id="pictureOptions" style="display: none">
+								<div class="fc-event inner text-color">
+									<input id="pictureInput" class="fc-event inner" type="text" name="Picture Link" placeholder="Paste your link" />
+								</div>
+								<div id="linkInputButton" class="fc-event inner"><i class="fa fa-camera"></i>&nbsp; Add picture</div>
+							</div>
+							<div id="duplicateButton" title="Duplicate selected element" class="fc-event"><i class="fa fa-copy"></i>&nbsp; Duplicate element</div>
+							<div id="deleteButton" title="Delete selected element" class="fc-event"><i class="fa fa-remove"></i>&nbsp; Delete element</div>
+							<div id="clearButton" title="Clear the canvas" class="fc-event"><i class="fa fa-trash-o"></i>&nbsp; Clear all elements</div>
+						</div>
+						<div id="saveOptions">
+							<div id="saveButton" title="Save your entry" class="fc-event"><i class="fa fa-save"></i>&nbsp; Save</div>
+							<div id="cancelButton" title="Cancel your changes" class="fc-event"><i class="fa fa-remove"></i>&nbsp; Cancel</div>
+						</div>
+						<div id="deleteContent">
+							<div id="deleteEntryButton" title="Delete your entry" class="fc-event"><i class="fa fa-trash-o"></i>&nbsp; Delete this entry</div>
+						</div>
+					</div>
+					<div id="canvas-column" class="column">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script src="res/js/lib/jquery-3.3.1.min.js"></script>
+<script src="res/js/lib/moment.min.js"></script>
+<script src="res/js/lib/jquery-ui.min.js"></script>
+<script src="res/js/lib/fullcalendar.min.js"></script>
+<script src="res/js/lib/fontfaceobserver.js"></script>
+<script src="res/js/lib/fabric.js"></script>
+<script src="res/js/lib/events.js"></script>
+<script src="res/js/lib/config.js"></script>
+<script src="res/js/lib/util.js"></script>
+<script src="res/js/lib/sweetalert.min.js"></script>
+<script src="res/js/src/DoMyDate.js"></script>
+<script src="res/js/src/DoMyDateModel.js"></script>
+<script src="res/js/src/CalendarView.js"></script>
+<script src="res/js/src/CanvasView.js"></script>
+<script>
+	DoMyDate.init();
+</script>
+
+</html>
